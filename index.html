@@ -339,7 +339,6 @@ details p{margin:8px 0 0;color:var(--muted);font-size:13px;max-width:80ch}
         </div>
         <div class="panel">
           <h2>Model Tables</h2>
-          <p class="hint">Download the reshaped tables as CSV to load into Power BI, or rebuild them with the Power Query steps below.</p>
           <div style="display:flex;flex-direction:column;gap:8px" id="downloads"></div>
           <div class="note"><b>Grain.</b> Fact_KPI_Monthly holds one row per KPI × month (15 × 8 = 120 rows), including months with no submission so that “not due” and “missing” can be told apart. Values are YTD as reported, so measures must never sum across months. Target_Month and Actual_Month hold the derived single-month values used by the Month view.</div>
         </div>
@@ -834,8 +833,7 @@ const DQ=[
  {sev:'m',kpi:'STR_KPI_015',issue:'Derived single-month Performance Reporting Timeliness exceeds 100% in May, June and July, which is impossible for a share of submissions. The YTD figures cannot be a simple average of monthly rates, or they are internally inconsistent.',treat:'Flagged in the month view; YTD view unaffected.',live:'Ask Strategy for the monthly counts (on-time and required submissions) behind the YTD rate.'},
  {sev:'l',kpi:'STR_KPI_004 STR_KPI_008 STR_KPI_009',issue:'Every column is labelled “YTD”, but occupancy, pipeline value and projects-on-schedule are point-in-time or average measures. It is unclear whether values are month-end snapshots or YTD averages.',treat:'Values used exactly as reported.',live:'Document the aggregation rule (snapshot, average, cumulative) per KPI in the master.'},
  {sev:'l',kpi:'STR_KPI_004',issue:'Portfolio Occupancy annual target (90%) is below the prior-year result (92%).',treat:'Scored against the target as set; flagged as a target-setting question.',live:'Ask Asset Management to explain the reduced ambition (e.g. new supply entering the portfolio).'},
- {sev:'l',kpi:'STR_KPI_011 STR_KPI_015',issue:'Two KPIs are owned and reported by Strategy itself, the same function that compiles the scorecard.',treat:'No change to scoring.',live:'Introduce independent validation or Internal Audit sampling for self-reported KPIs.'},
- {sev:'l',kpi:'All',issue:'Source layout mixes title rows, merged two-row headers, objective header rows and subtotal formula rows with data. The Guide names September as the current reporting month but data ends in August.',treat:'Header and subtotal rows removed in Power Query; pillar taken from the objective header by fill-down. Reporting period treated as Jan–Aug.',live:'Move the source to a flat submission template or database table with one row per KPI per month.'}
+ {sev:'l',kpi:'STR_KPI_011 STR_KPI_015',issue:'Two KPIs are owned and reported by Strategy itself, the same function that compiles the scorecard.',treat:'No change to scoring.',live:'Introduce independent validation or Internal Audit sampling for self-reported KPIs.'}
 ];
 function renderDQ(){
   document.getElementById('dqTable').innerHTML=`<thead><tr><th>Severity</th><th>KPI</th><th>Issue</th><th>Treatment in This Dashboard</th><th>Resolution in a Live Process</th></tr></thead><tbody>`+
